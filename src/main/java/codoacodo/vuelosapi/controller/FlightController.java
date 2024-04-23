@@ -36,7 +36,7 @@ public class FlightController {
         return vueloEncontrado;
     }
 
-    @DeleteMapping("/eliminar")
+    @DeleteMapping("/delete")
     public void deleteFlight(){
         long id = 1L;
         flightService.borrarVueloPorID(id);
