@@ -1,62 +1,59 @@
 package codoacodo.vuelosapi.services;
 
+import codoacodo.vuelosapi.configuration.FlightConfiguration;
+import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
+import codoacodo.vuelosapi.repository.FlightRepository;
+import codoacodo.vuelosapi.utils.FlightUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightService {
 
-    //creo lista
-    private List<Flight> flightList = new ArrayList<>();
-
-    //creo vuelos
-    Flight flight1 = new Flight(1L,"puerto","cordoba","24-2024","25-2024",1000.3,"mensual");
-    Flight flight2 = new Flight(2L,"puerto","cordoba","24-2024","25-2024",1000.3,"mensual");
-    Flight flight3 = new Flight(3L,"puerto","cordoba","24-2024","25-2024",1000.3,"mensual");
 
 
-    public Flight devolverVuelo(){
-    return new Flight(1L,"puerto","cordoba","24-2024","25-2024",1000.3,"mensual");
-}
 
-    //agrego vuelos a la lista
-    public void agregarVuelos(){
-        flightList.add(flight1);
-        flightList.add(flight2);
-        flightList.add(flight3);
+    @Autowired
+    FlightRepository flightRepository;
+    @Autowired
+    FlightUtils flightUtils;
+
+    @Autowired
+    FlightConfiguration flightConfiguration;
+
+    public List<Flight> returnAllFlights(){
+        return flightRepository.findAll();
     }
 
-    //retorno todos los vuelos
-    public List<Flight> traerTodosLosVuelos (){
-        agregarVuelos();
-        return flightList;
-
+    public void createFlight(Flight flight) {
+        flightRepository.save(flight);
     }
-    //no devuelve nada, crea un vuelo
-    //necesito que el usuario me mande un vuelo opr parametro para guardarlo
-    public void crearVuelo(){
-        agregarVuelos();
-        flightList.add(new Flight(4L,"puerto","cordoba","24-2024","25-2024",1000.3,"mensual"));
+
+    public Flight findFlightId (Long id){
+        return flightRepository.findById(id).orElse(new Flight());
+    }
+
+    public void deleteFlightId (Long id){
 
     }
 
-    public void borrarVueloPorID(Long id) {
-       Flight vueloABorrar = buscarVueloPorId(id);
-        flightList.remove(vueloABorrar);
-
+    public Flight updateFlight(Flight flight){
+        flightRepository.save(flight);
+        return flightRepository.findById(flight.getId()).orElse(null);
     }
 
-    public Flight buscarVueloPorId(Long id) {
-        agregarVuelos();
+    public List<Flight> getOffers(int offerPrice) {
+        List<Flight> flights = flightRepository.findAll();
+        return flightUtils.detectOffers(flights,offerPrice);
+    }
 
-        for (int i=0; i<flightList.size(); i++ ){
-            if(flightList.get(i).getId() == id){
-                return flightList.get(i);
-            }
-        }
-        return null;
+    public Dolar getDolar() {
+        Dolar dolar = flightConfiguration.fetchDolar();
+        return dolar;
     }
 }

@@ -23,4 +23,16 @@ public class Flight {
     private String frecuencia;
 
 
+    public Flight(String origen, String destino, String fechaHoraSalida, String fechaHoraLlegada, Double precio, String frecuencia) {
+        this.origen = origen;
+        this.destino = destino;
+        this.fechaHoraSalida = fechaHoraSalida;
+        this.fechaHoraLlegada = fechaHoraLlegada;
+        this.precio = precio;
+        this.frecuencia = frecuencia;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
