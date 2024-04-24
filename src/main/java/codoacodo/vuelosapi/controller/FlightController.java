@@ -2,9 +2,9 @@ package codoacodo.vuelosapi.controller;
 
 import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
+import codoacodo.vuelosapi.model.FlightDto;
 import codoacodo.vuelosapi.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +15,9 @@ public class FlightController {
     @Autowired
     FlightService flightService;
 
-    @GetMapping("/todos")
-    public List<Flight> getAllFlights () {
-        return flightService.returnAllFlights();
+    @GetMapping("/all")
+    public List<FlightDto> getAllFlights () {
+        return flightService.findAll();
     }
 
     //no devuelve nada
@@ -51,8 +51,5 @@ public class FlightController {
         return flightService.updateFlight(flight);
     }
 
-    @GetMapping("/dolar")
-    public Dolar getDolar(){
-        return flightService.getDolar();
-    }
+
 }

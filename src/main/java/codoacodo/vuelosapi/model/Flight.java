@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
@@ -13,26 +14,26 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class Flight {
+    @Getter
     @Id
     private Long id;
-    private String origen;
-    private String destino;
-    private String fechaHoraSalida;
-    private String fechaHoraLlegada;
-    private Double precio;
-    private String frecuencia;
+    private String origin;
+    private String destiny;
+    private String departureTime;
+    private String arrivingTime;
+    private Double price;
+    private String frequency;
 
 
-    public Flight(String origen, String destino, String fechaHoraSalida, String fechaHoraLlegada, Double precio, String frecuencia) {
-        this.origen = origen;
-        this.destino = destino;
-        this.fechaHoraSalida = fechaHoraSalida;
-        this.fechaHoraLlegada = fechaHoraLlegada;
-        this.precio = precio;
-        this.frecuencia = frecuencia;
-    }
+    private Company company;
 
-    public Long getId() {
-        return id;
+
+    public Flight(String origin, String destiny, String departureTime, String arrivingTime, Double price, String frequency) {
+        this.origin = origin;
+        this.destiny = destiny;
+        this.departureTime = departureTime;
+        this.arrivingTime = arrivingTime;
+        this.price = price;
+        this.frequency = frequency;
     }
 }

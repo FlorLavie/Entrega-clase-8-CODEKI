@@ -16,5 +16,6 @@ public class Dolar {
     public double getPromedio(){
         return ((getCompra() + getVenta())/2);
     }
+
 }
 

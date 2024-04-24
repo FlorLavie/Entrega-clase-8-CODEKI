@@ -7,12 +7,14 @@ public class FlightDto {
 
 
     private Long id;
-    private String origen;
-    private String destino;
-    private String fechaHoraSalida;
-    private String fechaHoraLlegada;
-    private Double convertedPrecio;
-    private String frecuencia;
+    private String origin;
+    private String destiny;
+    private String departureTime;
+    private String arrivingTime;
+    private double convertedPrice;
+    private String frequency;
 
 
+    public FlightDto(Long id, String origin, String destiny, String departureTime, String arrivingTime, double v, String frequency, Company company) {
+    }
 }
